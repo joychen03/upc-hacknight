@@ -1,3 +1,3 @@
 export default function Footer() {
-  return <header>This is app footer</header>;
+  return <footer>This is app footer</footer>;
 }

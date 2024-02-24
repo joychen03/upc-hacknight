@@ -7,49 +7,27 @@ export default function BlogsPage() {
   const [data, setData] = useState<Blog[]>([]);
 
   useEffect(() => {
-    // fetch("api/blogs")
-    //   .then((res) => res.json())
-    //   .then((content : Blog[]) => setData(content));
-
-    const testBlogs: Blog[] = [];
-
-    testBlogs.push({
-      author: "LEONARDO DA VINCI",
-      date: "XVI",
-      image: "",
-      shortDesc:
-        "La Mona Lisa, o El retrato de Lisa Gherardini, aún siguen surgiendo teorías sobre la identidad –y sobre la enigmática sonrisa– de la retratada por el gran artista renacentista a comienzos del siglo XVI.",
-      title: "LA GIOCONDA",
-    });
-    /*
-    testBlogs.push({
-      author: "PABLO PICASSO",
-      date: "1937",
-      image: "",
-      shortDesc:
-        "Todo un alegato contra la guerra pintado por el artista en 1937 al conocer los bombardeos de la aviación alemana sobre el pueblo vasco que le da nombre. Tras muchas periplos está expuesto en el museo Reina Sofía de Madrid desde 1981. Sin duda uno de los cuadros más famosos de Pablo Picasso.",
-      title: "EL GUERNICA",
-    });
-    */
-    setData(testBlogs);
+    fetch("/api/blog")
+      .then((res) => res.json())
+      .then((content: Blog[]) => setData(content));
   }, []);
 
   return (
-    <div>
-      This is blog page
-      {data.map((blog, index) => {
+    <div className="grid grid-cols-3 grid-flow-row gap-3 m-5 bg-gradient-to-r from-slate-500 to-black">
+      {data.map((blog) => {
         return (
           <div
-            key={index}
-            style={{
-              padding: "20px",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "24",
-            }}
+            key={blog.id}
+            className="p-5 m-2 border rounded-md bg-gradient-to-b from-sky-300 to-white"
           >
-            This is the blog page
-            {data.map((blog, index) => (
+            <p className="font-bold text-1xl">{blog.title}</p>
+            <p>
+              <img src={blog.image} alt="" />
+            </p>
+            <div className="italic">{blog.shortDesc}</div>
+            <div className="text-center">{blog.author}</div>
+            <div className="text-end">{blog.date}</div>
+            {/* {data.map((blog, index) => (
               <div
                 key={index}
                 style={{
@@ -85,7 +63,7 @@ export default function BlogsPage() {
                   {blog.date}
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         );
       })}

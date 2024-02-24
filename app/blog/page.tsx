@@ -16,11 +16,10 @@ export default function BlogsPage() {
     <div className="grid grid-cols-3 grid-flow-row gap-3 m-5 bg-gradient-to-r from-slate-500 to-black">
       {data.map((blog) => {
         return (
-          <div
-            key={blog.id}
-            className="p-5 m-2 border rounded-md bg-gradient-to-b from-sky-300 to-white"
-          >
-            <p className="font-bold text-1xl">{blog.title}</p>
+          <div key={blog.id} className="p-5 m-2 border rounded-md bg-gradient-to-b from-sky-300 to-white">
+            <a className="font-bold text-1xl" href={`/blog/${blog.id}`}>
+              {blog.title}
+            </a>
             <p>
               <img src={blog.image} alt="" />
             </p>
